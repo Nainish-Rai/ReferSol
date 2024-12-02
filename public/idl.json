@@ -1,0 +1,61 @@
+{
+  "version": "0.1.0",
+  "name": "referral_program",
+  "instructions": [
+    {
+      "name": "initializeReferrer",
+      "accounts": [
+        { "name": "referrer", "isMut": true, "isSigner": false },
+        { "name": "user", "isMut": true, "isSigner": true },
+        { "name": "systemProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": [{ "name": "referralCode", "type": "string" }]
+    },
+    {
+      "name": "createReferral",
+      "accounts": [
+        { "name": "referrer", "isMut": true, "isSigner": false },
+        { "name": "referral", "isMut": true, "isSigner": false },
+        { "name": "user", "isMut": true, "isSigner": true },
+        { "name": "systemProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": [{ "name": "referralCode", "type": "string" }]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "ReferrerProfile",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "owner", "type": "publicKey" },
+          { "name": "referralCode", "type": "string" },
+          { "name": "totalReferrals", "type": "u64" },
+          { "name": "totalRewards", "type": "u64" },
+          { "name": "bump", "type": "u8" }
+        ]
+      }
+    },
+    {
+      "name": "Referral",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "referrer", "type": "publicKey" },
+          { "name": "referredUser", "type": "publicKey" },
+          { "name": "timestamp", "type": "i64" },
+          { "name": "bump", "type": "u8" }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "CodeTooLong",
+      "msg": "Referral code cannot be longer than 20 characters"
+    },
+    { "code": 6001, "name": "InvalidCode", "msg": "Invalid referral code" },
+    { "code": 6002, "name": "SelfReferral", "msg": "Cannot refer yourself" }
+  ]
+}
