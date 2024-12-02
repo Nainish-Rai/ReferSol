@@ -10,7 +10,7 @@ import { useUIStore } from "@/store/uiStore";
 // Import your IDL
 import idl from "../public/idl.json";
 
-const PROGRAM_ID = "YOUR_DEPLOYED_PROGRAM_ID"; // Replace with your deployed program ID
+const PROGRAM_ID = "Hko13xpywriTmjsjPzaurFUm5vExQdWRM916V36iDNeo"; // Replace with your deployed program ID
 
 export const ReferralProgram = () => {
   const { connected, publicKey } = useWallet();
